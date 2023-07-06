@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-...tu-integridad-aqui..." crossorigin="anonymous" />
+       <title>Tarjetas de Propiedades</title>
+        <style>
+            .card-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .card {
+                box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+                border-radius: 10px;
+                width: 450px; 
+                height: 550px;
+                overflow: hidden;
+                margin-bottom: 20px;
+
+            }
+            .card img {
+                width: 100%;
+                height: 300px;
+                object-fit: cover;
+                border-radius: 10px 10px 0 0;
+            }
+            .details-container {
+                display: flex;    
+                position: relative; top: 10px;
+                color: #676e75;
+            }
+
+            .card h4 {
+                font-size: 19px;
+                color: black;
+                margin-left: 20px;
+             
+            }
+
+            .card p{
+                padding-left: 20px; 
+                font-family: Arial, Helvetica, sans-serif;
+                position: relative; bottom: 40px;
+                
+            }
+            .description{
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 10pt;
+            }
+            .txtAzul{
+                font-family: Arial, Helvetica, sans-serif;
+                color: #01a7c6;
+                font-size: 15pt;
+                font-weight: bold;
+            }
+            .finalTxt {
+                display: flex;    
+                font-size: 12pt;
+                margin-left: 20px;
+            }
+            .finalTxt p {
+                flex: 1;
+                margin: 0;
+            }
+
+            .finalTxt i {
+                margin-right: 5px;
+                position: relative; bottom: 40px;
+                color: #01a7c6;
+                font-size: 20px;
+            }
+            .image-container {
+                position: relative;
+            }
+
+            .image-container .availability-bar {
+                position: absolute;
+                top: 40px;
+                left: 320px;
+                width: 40%;
+                height: 45px;
+                background-color: #bd0708;
+                border-radius: 10px 10px 0px 10px;
+            }
+
+            .image-container .availability-text {
+                position: absolute;
+                bottom: 215px;
+                left: 330px;
+                width: 100%;
+                height: 20px;
+                justify-content: right;
+                align-items: right;
+                color: white;
+                font-weight: bold;
+                font-size: 14px;
+            }
+                    
+        </style>
+      
+    </head>
+    </head>
+    <body>
+        <br>
+        <div>
+            <div id="property-cards" class="card-container"></div>
+        </div>
+
+
+        <script>
+            var datos = [
+                {
+                    "name": "AIA Azul",
+                    "description": "DEPARTAMENTOS",
+                    "location": "San Luis Potosí",
+                    "totalArea": 132,
+                    "img": "https://www.aiapartner.com/public/img/proyects/61e0a72d8457cd38862ea4c2.png",
+                    "terrace": 14.8,
+                    "rooms": 2,
+                    "isAvailable": true
+                },
+                {
+                    "name": "AIA León",
+                    "description": "CASAS",
+                    "location": "Nuevo León",
+                    "totalArea": 132,
+                    "img": "https://www.aiapartner.com/public/img/proyects/60db8b689517e71d5033e9f2.jpg",
+                    "terrace": 0,
+                    "rooms": 3,
+                    "isAvailable": true
+                },
+                {
+                    "name": "AIA Barlovento",
+                    "description": "DEPARTAMENTOS",
+                    "location": "San Luis Potosí",
+                    "totalArea": 116.72,
+                    "img": "https://www.aiapartner.com/public/img/proyects/60d5ef025a77b328dc591f7a.jpg",
+                    "terrace": 13.12,
+                    "rooms": 2,
+                    "isAvailable": false
+                },
+
+                {
+                    "name": "AIA Verde",
+                    "description": "DEPARTAMENTOS",
+                    "location": "San Luis Potosí",
+                    "totalArea": 107,
+                    "img": "https://www.aiapartner.com/public/img/proyects/612412683ae3f20030f5957d.jpeg",
+                    "terrace": 15.2,
+                    "rooms": 2,
+                    "isAvailable": false
+                },
+                {
+                    "name": "AIA Roja",
+                    "description": "DEPARTAMENTOS",
+                    "location": "Guanajuato",
+                    "totalArea": 168.1,
+                    "img": "https://www.aiapartner.com/public/img/proyects/6127f1a908bc42002fcf27c3.webp",
+                    "terrace": 23.2,
+                    "rooms": 3,
+                    "isAvailable": false
+                },
+
+            ];
+
+            var cardsContainer = document.getElementById("property-cards");
+
+            datos.forEach(function(property) {
+            var card = document.createElement("div");
+            card.classList.add("card");
+
+            //CONTENEDOR DE IMAGENES
+            var imageContainer = document.createElement("div");
+            imageContainer.classList.add("image-container");
+
+            var image = document.createElement("img");
+            image.src = property.img;
+            imageContainer.appendChild(image);
+
+            if (!property.isAvailable) {
+                var availabilityBar = document.createElement("div");
+                availabilityBar.classList.add("availability-bar");
+
+                var availabilityText = document.createElement("p");
+                availabilityText.classList.add("availability-text");
+                availabilityText.textContent = "VENDIDO";
+
+                imageContainer.appendChild(availabilityBar);
+                imageContainer.appendChild(availabilityText);
+            }
+
+            card.appendChild(imageContainer);
+
+            var name = document.createElement("h4"); 
+            name.textContent = property.name;
+            card.appendChild(name);
+
+            var description = document.createElement("p");
+            description.textContent = property.description;
+            card.classList.add("description");
+
+            var location = document.createElement("p");
+            location.textContent = property.location;
+            card.appendChild(location);
+
+            var detailsContainer = document.createElement("div");
+            detailsContainer.classList.add("details-container");
+            detailsContainer.appendChild(description);
+            detailsContainer.appendChild(location);
+            card.appendChild(detailsContainer);
+            
+            var additionalText = document.createElement("p");
+            additionalText.innerHTML = "Desde";
+
+            card.appendChild(additionalText);
+            var additionalText = document.createElement("p");
+            additionalText.innerHTML = "$1,940,000 MXN";
+            additionalText.classList.add("txtAzul");
+            card.appendChild(additionalText);
+
+      
+            var totalArea = document.createElement("p");
+            totalArea.innerHTML =  property.totalArea + " M <br>Totales"; 
+            card.appendChild(totalArea);
+
+            var terrace = document.createElement("p");
+            terrace.innerHTML = property.terrace + " M <br>Terraza"; 
+            card.appendChild(terrace);
+
+            var rooms = document.createElement("p");
+            rooms.innerHTML = property.rooms + " <br>Recámaras"; 
+            card.appendChild(rooms);
+
+            var finalTxt = document.createElement("div");
+            finalTxt.classList.add("finalTxt");
+
+            var totalAreaIcon = document.createElement("i");
+            totalAreaIcon.classList.add("fas", "fa-chart-area");
+            finalTxt.appendChild(totalAreaIcon);
+            finalTxt.appendChild(totalArea);
+
+            var terraceIcon = document.createElement("i");
+            terraceIcon.classList.add("fas", "fa-couch");
+            finalTxt.appendChild(terraceIcon);
+            finalTxt.appendChild(terrace);
+
+            var roomsIcon = document.createElement("i");
+            roomsIcon.classList.add("fas", "fa-bed");
+            finalTxt.appendChild(roomsIcon);
+            finalTxt.appendChild(rooms);
+
+            card.appendChild(finalTxt);
+
+
+            cardsContainer.appendChild(card);
+            });
+        </script>
+    </body>
+</html>
